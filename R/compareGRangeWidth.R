@@ -1,0 +1,14 @@
+source("R/SourceFiles.R")
+
+compareGRangeWidth <- function(Obj1, Obj2){
+    widthAnalysis <- data.frame(
+        width = c(width(Obj1), width(Obj2)), #nolint
+        condition = rep(c(deparse(substitute(Obj1)), deparse(substitute(Obj2))), c(length(Obj1), length(Obj2))) #nolint
+    )
+    widthPlot <- ggplot(widthAnalysis, aes(x = width, fill = condition))+ #nolint
+        geom_density(alpha = 0.4)+ #nolint 
+        scale_x_log10()+ #nolint
+        theme_classic()+ # nolint: object_usage_linter.
+        labs(title = "Peak width comparison", x = "Peak width (bp)", y = "Density") #nolint
+    return(widthPlot)
+}
