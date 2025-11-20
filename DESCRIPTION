@@ -1,11 +1,32 @@
 Package: bccAnalysis
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Collection of Functions for ChIP-seq analysis and import
+Version: 0.0.0.1
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+    person("Jacob", "Martin", email =  "Jacob@martin-email.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
+Imports: 
+    GenomicRanges,
+    rtracklayer,
+    TxDb.Hsapiens.UCSC.hg38.knownGene,
+    org.Hs.eg.db,
+    tidyverse,
+    ChIPpeakAnno,
+    ggvenn,
+    clusterProfiler,
+    ggupset,
+    ReactomePA,
+    plyranges,
+    writexl,
+    readxl,
+    dplyr,
+    patchwork,
+    qpdf,
+    gridExtra,
+    gridGraphics,
+    grid,
+    ChIPseeker
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
