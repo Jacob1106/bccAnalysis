@@ -3,7 +3,7 @@ source("R/SourceFiles.R")
 #' @title Width Comparison of 2 GRanges Objects
 #' @param Obj1 GRanges Object 
 #' @param Obj2 GRanges Object
-#' @return Returns a plot that shows the width of Object 1 and Object 2. Plot = (x = Width of Peak) (y = Density of a particular width (How many peaks have that width))
+#' @return GGplot | Returns a plot that shows the width of Object 1 and Object 2. Plot = (x = Width of Peak) (y = Density of a particular width (How many peaks have that width))
 #' @export
 compareGRangeWidth <- function(Obj1, Obj2){
     widthAnalysis <- data.frame(

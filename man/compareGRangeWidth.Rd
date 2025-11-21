@@ -12,7 +12,7 @@ compareGRangeWidth(Obj1, Obj2)
 \item{Obj2}{GRanges Object}
 }
 \value{
-Returns a plot that shows the width of Object 1 and Object 2. Plot = (x = Width of Peak) (y = Density of a particular width (How many peaks have that width))
+GGplot | Returns a plot that shows the width of Object 1 and Object 2. Plot = (x = Width of Peak) (y = Density of a particular width (How many peaks have that width))
 }
 \description{
 Width Comparison of 2 GRanges Objects
