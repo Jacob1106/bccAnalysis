@@ -1,6 +1,14 @@
 source("R/SourceFiles.R")
 
-
+#' @title Filtering Function that filter by a custom p value and chromosome list
+#' @param object1 GRanges Object
+#' @param object2 GRanges Object 
+#' @param overlapobject1 The overlap G ranges object of object1 
+#' @param overlapobject2 The overlap G ranges object of object2 
+#' @param object1_unique The unique peaks as a G ranges object of object1 
+#' @param object2_unique The unique peaks as a G ranges object of object2 
+#' @return Returns a tibble that shows: Proportion of Overlap, TotalPeak coverage, Total number of unique bases, number of overlap peaks and percentage overlap of peaks for object 1 and 2.   
+#' @export
 proportionOverlapTibble <- function(object1, object2, overlapobject1, overlapobject2, object1_unique, object2_unique){
     total_base_overlap <- 0 # nolint
     totalwidthObj1 <- sum(width(object1)) #nolint
