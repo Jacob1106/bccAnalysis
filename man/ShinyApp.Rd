@@ -8,6 +8,8 @@ ShinyApp(named_file_list, height = 850)
 }
 \arguments{
 \item{named_file_list}{A named list with file paths for narrowPeak files. These files will be imported as GRanges Objects.}
+
+\item{height}{Controls Browser window size on first launch}
 }
 \value{
 Returns an Analysis App. Outputs: Overlaps, Unique peak annotations, width analysis and proportion overlap table

@@ -3,6 +3,9 @@
 #' @param Obj1 GRanges Object 
 #' @param Obj2 GRanges Object
 #' @return GGplot | Returns a plot that shows the width of Object 1 and Object 2. Plot = (x = Width of Peak) (y = Density of a particular width (How many peaks have that width))
+#' @importFrom GenomicRanges width
+#' @importFrom ggplot2 ggplot aes geom_density scale_x_log10 theme_classic labs
+#' @author Jacob Martin
 #' @export
 compareGRangeWidth <- function(Obj1, Obj2){
     widthAnalysis <- data.frame(

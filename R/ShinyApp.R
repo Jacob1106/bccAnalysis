@@ -1,29 +1,16 @@
 #' @title Shiny App for Chip-Seq Analysis
 #' @param named_file_list A named list with file paths for narrowPeak files. These files will be imported as GRanges Objects. 
-#' @return Returns an Analysis App. Outputs: Overlaps, Unique peak annotations, width analysis and proportion overlap table   
+#' @param height Controls Browser window size on first launch 
+#' @return Returns an Analysis App. Outputs: Overlaps, Unique peak annotations, width analysis and proportion overlap table  
 #' @import shiny
 #' @import bslib
-#' @import bccAnalysis
-#' @import GenomicRanges
-#' @import rtracklayer
-#' @import TxDb.Hsapiens.UCSC.hg38.knownGene
-#' @import org.Hs.eg.db
-#' @import ChIPseeker
-#' @import tidyverse
-#' @import ChIPpeakAnno
-#' @import ggvenn
-#' @import clusterProfiler
-#' @import ggupset
-#' @import ReactomePA
-#' @import plyranges
-#' @import writexl
-#' @import readxl
-#' @import dplyr
-#' @import patchwork
-#' @import qpdf
-#' @import gridExtra
-#' @import gridGraphics
-#' @import grid
+#' @importFrom GenomicRanges GRangesList seqnames findOverlaps width start end
+#' @importFrom rtracklayer import
+#' @importFrom grDevices pdf dev.off
+#' @importFrom writexl write_xlsx
+#' @importFrom ChIPseeker annotatePeak plotAnnoBar
+#' @importFrom gridExtra grid.arrange
+#' @importFrom TxDb.Hsapiens.UCSC.hg38.knownGene TxDb.Hsapiens.UCSC.hg38.knownGene
 #' @author Jacob Martin
 #' @export
 

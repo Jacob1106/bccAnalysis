@@ -25,3 +25,6 @@ Returns a list of GRange Objects with a new column for normal p values. The list
 \description{
 Filtering Function that filter by a custom p value and chromosome list
 }
+\author{
+Jacob Martin
+}

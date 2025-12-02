@@ -17,3 +17,6 @@ Returns a single GRange Object that is merged and filtered by overlaps.
 \description{
 Filtering GRange Objects by number of overlaps with other samples. This function is used to merge multiple GRange Objects into one.
 }
+\author{
+Jacob Martin
+}

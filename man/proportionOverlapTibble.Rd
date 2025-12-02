@@ -32,3 +32,6 @@ Returns a tibble that shows: Proportion of Overlap, TotalPeak coverage, Total nu
 \description{
 Filtering Function that filter by a custom p value and chromosome list
 }
+\author{
+Jacob Martin
+}

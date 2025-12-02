@@ -21,3 +21,6 @@ GGplot | Venn Diagram showing overlaps between two GRanges Objects.
 \description{
 Comparing Overlap of two GRange Objects
 }
+\author{
+Jacob Martin
+}

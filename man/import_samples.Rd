@@ -15,3 +15,6 @@ Returns a list of GRange Objects with a new column for normal p values. The list
 \description{
 Importing narrowPeak files and converting into a GRanges Object
 }
+\author{
+Jacob Martin
+}

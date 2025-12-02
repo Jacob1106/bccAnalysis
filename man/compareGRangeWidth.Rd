@@ -17,3 +17,6 @@ GGplot | Returns a plot that shows the width of Object 1 and Object 2. Plot = (x
 \description{
 Width Comparison of 2 GRanges Objects
 }
+\author{
+Jacob Martin
+}

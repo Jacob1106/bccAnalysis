@@ -6,7 +6,10 @@
 #' @param overlapobject2 The overlap G ranges object of object2 
 #' @param object1_unique The unique peaks as a G ranges object of object1 
 #' @param object2_unique The unique peaks as a G ranges object of object2 
-#' @return Returns a tibble that shows: Proportion of Overlap, TotalPeak coverage, Total number of unique bases, number of overlap peaks and percentage overlap of peaks for object 1 and 2.   
+#' @return Returns a tibble that shows: Proportion of Overlap, TotalPeak coverage, Total number of unique bases, number of overlap peaks and percentage overlap of peaks for object 1 and 2.
+#' @importFrom GenomicRanges start end width
+#' @importFrom tibble tibble 
+#' @author Jacob Martin  
 #' @export
 proportionOverlapTibble <- function(object1, object2, overlapobject1, overlapobject2, object1_unique, object2_unique){
     total_base_overlap <- 0 # nolint
