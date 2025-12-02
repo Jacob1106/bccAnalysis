@@ -4,8 +4,7 @@ Version: 0.0.0.1
 Authors@R: 
     person("Jacob", "Martin", email =  "Jacob@martin-email.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: LICENSE
 Imports: 
     GenomicRanges,
     rtracklayer,
