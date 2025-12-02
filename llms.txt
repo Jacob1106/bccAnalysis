@@ -9,11 +9,11 @@ annotation, width comparison, and visualization.**
 
 ## ✨ Features
 
-- 📊 **Peak overlap analysis** with custom Venn diagrams
-- 🎯 **Peak annotation** using ChIPseeker + TxDb.Hsapiens.UCSC.hg38
-- 📈 **Width comparison** density plots
-- 📋 **Export tables** (Excel) and plots (PDF)
-- 🔄 **Multi-sample filtering** by p-value and overlap count
+- **Peak overlap analysis** with custom Venn diagrams
+- **Peak annotation** using ChIPseeker + TxDb.Hsapiens.UCSC.hg38
+- **Width comparison** density plots
+- **Export tables** (Excel) and plots (PDF)
+- **Multi-sample filtering** by p-value and overlap count
 
 ## 🚀 Installation
 
@@ -43,7 +43,7 @@ MIT © \[Jacob Martin\] 2025 \[memory:21\]
 
 ## 🙏 Acknowledgments
 
-Built with ❤️ using R package development best practices from [Hadley
+Built with using R package development best practices from [Hadley
 Wickham](https://r-pkgs.org/).
 
 # Package index
