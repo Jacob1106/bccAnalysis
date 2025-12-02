@@ -6,7 +6,7 @@
 # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
 # * https://testthat.r-lib.org/articles/special-files.html
 
-library(bccAnalysis)
+
 library(rtracklayer)
 library(GenomicRanges)
 
@@ -58,6 +58,8 @@ create_test_granges <- function() {
   gr2 <- c(shared_gr, gr2_unique)
   gr1$pValue <- gr1$pvalue
   gr2$pValue <- gr2$pvalue
+  gr1$pvalue <- NULL
+  gr2$pvalue <- NULL
   # FINAL VERIFICATION
   stopifnot(all(colnames(mcols(gr1)) == "pValue"))
   stopifnot(all(colnames(mcols(gr2)) == "pValue"))
@@ -85,6 +87,7 @@ create_test_granges <- function() {
 #     expect_true()
 
 # })
-test_list <- list("sample1" = gr1, "sample2" = gr2)
-filtered <- filter_by_pvalue(list = test_list, pvalue = 0.01)
+# test_list <- list("sample1" = gr1, "sample2" = gr2)
+# filtered <- filter_by_pvalue(test_list, pvalue = 0.01, chromosomes = "chr1")
 
+f <- rtracklayer::import("/Volumes/JM/Analysis_Projects/ChIP.v.CnR/CTCF/NarrowPeakFiles/CHIP/SJHGG059115_C5-LTC42_P21-CTCF-AB2_REP1_peaks.narrowPeak")
