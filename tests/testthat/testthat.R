@@ -6,7 +6,7 @@
 # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
 # * https://testthat.r-lib.org/articles/special-files.html
 
-
+library(bccAnalysis)
 library(rtracklayer)
 library(GenomicRanges)
 
@@ -86,5 +86,5 @@ create_test_granges <- function() {
 
 # })
 test_list <- list("sample1" = gr1, "sample2" = gr2)
-filtered <- filter_by_pvalue(list = test_list, pvalue = 0.01, chromosomes = c("chr1"))
+filtered <- filter_by_pvalue(list = test_list, pvalue = 0.01)
 
