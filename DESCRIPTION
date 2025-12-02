@@ -27,7 +27,9 @@ Imports:
     grid,
     ChIPseeker,
     shiny,
-    bslib
+    bslib, 
+    ggplot2,
+    tibble
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
