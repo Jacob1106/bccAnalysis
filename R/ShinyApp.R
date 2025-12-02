@@ -1,28 +1,29 @@
 #' @title Shiny App for Chip-Seq Analysis
 #' @param named_file_list A named list with file paths for narrowPeak files. These files will be imported as GRanges Objects. 
 #' @return Returns an Analysis App. Outputs: Overlaps, Unique peak annotations, width analysis and proportion overlap table   
-#' @rawNamespace import(shiny)
-#' @rawNamespace import(bslib)
-#' @importFrom GenomicRanges GRangesList seqnames
-#' @importFrom rtracklayer import
-#' @importFrom TxDb.Hsapiens.UCSC.hg38.knownGene TxDb.Hsapiens.UCSC.hg38.knownGene
-#' @importFrom org.Hs.eg.db org.Hs.eg.db
-#' @importFrom ChIPseeker annotatePeak plotAnnoBar
-#' @importFrom tidyverse %>%
-#' @importFrom ChIPpeakAnno overlapGRangeList
-#' @importFrom ggvenn ggVennDiagram
-#' @importFrom clusterProfiler compareCluster
-#' @importFrom ggupset upset
-#' @importFrom ReactomePA enrichPathway
-#' @importFrom plyranges filter
-#' @importFrom writexl write_xlsx
-#' @importFrom readxl read_excel
-#' @importFrom dplyr mutate select
-#' @importFrom patchwork wrap_plots
-#' @importFrom qpdf pdf_compress
-#' @importFrom gridExtra grid.arrange
-#' @importFrom gridGraphics grid.grabExpr
-#' @importFrom grid grid.newpage grid.text
+#' @import shiny
+#' @import bslib
+#' @import bccAnalysis
+#' @import GenomicRanges
+#' @import rtracklayer
+#' @import TxDb.Hsapiens.UCSC.hg38.knownGene
+#' @import org.Hs.eg.db
+#' @import ChIPseeker
+#' @import tidyverse
+#' @import ChIPpeakAnno
+#' @import ggvenn
+#' @import clusterProfiler
+#' @import ggupset
+#' @import ReactomePA
+#' @import plyranges
+#' @import writexl
+#' @import readxl
+#' @import dplyr
+#' @import patchwork
+#' @import qpdf
+#' @import gridExtra
+#' @import gridGraphics
+#' @import grid
 #' @author Jacob Martin
 #' @export
 

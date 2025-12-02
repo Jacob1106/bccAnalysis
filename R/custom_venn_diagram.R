@@ -1,4 +1,3 @@
-source("bccAnalysis/R/SourceFiles.R")
 
 #' @title Comparing Overlap of two GRange Objects
 #' @param conditionA String with the name of the DataA

@@ -26,7 +26,9 @@ Imports:
     gridExtra,
     gridGraphics,
     grid,
-    ChIPseeker
+    ChIPseeker,
+    shiny,
+    bslib
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3

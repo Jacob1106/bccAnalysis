@@ -1,7 +1,14 @@
-#' bccAnalysis : Package for ChIP-seq Analysis and Filtering
-#' This package provides tools to import, create and analyse GRanges Objects
-#' There are 6 main functions within this package: filter_by_pvalue, proportionOverlapTibble, overlapGRangeList, custom_venn_diagram, import_samples and compareGRangeWidth
-#' @docType package
+#' bccAnalysis: ChIP-Seq Peak Analysis Tools
+#'
+#' Analysis tools for ChIP-Seq peak data including overlap analysis, 
+#' peak annotation, and visualization with Shiny applications.
+#' 
+#' The bccAnalysis package provides tools for processing GRanges objects from 
+#' narrowPeak files, performing overlap analysis, peak annotation using ChIPseeker, 
+#' and interactive Shiny applications for visualization.
+#' 
+#' @seealso \code{\link{ShinyApp}}
+#' @author Jacob Martin
+#' 
 #' @name bccAnalysis
-#' @title Analysis Toolbox for GRanges Data
 NULL

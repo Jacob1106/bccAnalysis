@@ -1,4 +1,3 @@
-source("R/SourceFiles.R")
 
 #' @title Width Comparison of 2 GRanges Objects
 #' @param Obj1 GRanges Object 

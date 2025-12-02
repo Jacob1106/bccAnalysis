@@ -1,4 +1,3 @@
-source("R/SourceFiles.R")
 
 #' @title Filtering Function that filter by a custom p value and chromosome list
 #' @param object1 GRanges Object
