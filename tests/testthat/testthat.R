@@ -5,7 +5,7 @@
 # Learn more about the roles of various files in:
 # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
 # * https://testthat.r-lib.org/articles/special-files.html
-
+library(bccAnalysis)
 library(testthat)
 library(rtracklayer)
 library(GenomicRanges)
@@ -59,19 +59,24 @@ generate_sequences <- function(lengths) {
 seqs1 <- generate_sequences(lengths1)
 seqs2 <- generate_sequences(lengths2)
 
-# P-values: 25 below 0.01, 25 above 0.01 (shuffled)
+# Generate raw p-values: 25 below 0.01 and 25 above 0.01 (shuffled)
 make_pvals <- function(n) {
   c(runif(n/2, 1e-6, 0.009), runif(n/2, 0.011, 0.05))
 }
-pvals1 <- sample(make_pvals(n_peaks))
-pvals2 <- sample(make_pvals(n_peaks))
 
-# Create GRanges objects
+raw_pvals1 <- sample(make_pvals(n_peaks))
+raw_pvals2 <- sample(make_pvals(n_peaks))
+
+# Compute negative log10 p-values
+neg_log_pvals1 <- -log10(raw_pvals1)
+neg_log_pvals2 <- -log10(raw_pvals2)
+
+# Create GRanges objects with pvalue as negative log10 of raw p-value
 gr1 <- GRanges(
   seqnames = Rle(chrom),
   ranges = IRanges(start = starts1, end = ends1),
   strand = Rle("*"),
-  pvalue = pvals1,
+  pvalue = neg_log_pvals1,
   sequence = seqs1
 )
 
@@ -79,17 +84,22 @@ gr2 <- GRanges(
   seqnames = Rle(chrom),
   ranges = IRanges(start = starts2, end = ends2),
   strand = Rle("*"),
-  pvalue = pvals2,
+  pvalue = neg_log_pvals2,
   sequence = seqs2
 )
 
-# Verify structure
+# Check example output
+gr1[1:3]
+gr2[1:3]
+gr1$pValue <- gr1$pvalue
+gr2$pValue <- gr2$pvalue
+gr1$pvalue <- NULL
+gr2$pvalue <- NULL
+
 cat("GR1: ", length(gr1), "ranges\n")
 cat("Shared peaks (identical ranges):", sum(countOverlaps(gr1, gr2, type = "equal") > 0), "\n")
-cat("GR1 pvalues < 0.01:", sum(mcols(gr1)$pvalue < 0.01), "\n")
-cat("GR2 pvalues < 0.01:", sum(mcols(gr2)$pvalue < 0.01), "\n")
-
-
+cat("GR1 pvalues < 0.01:", sum(mcols(gr1)$pValue < 2), "\n")
+cat("GR2 pvalues < 0.01:", sum(mcols(gr2)$pValue < 2), "\n")
 
 # Test tha filter_by_pvalue works: 
 
@@ -102,6 +112,6 @@ test_that("Filter by P value works", {
 
     expect_length(filtered, 2)
 })
-# test_list <- list("sample1" = gr1, "sample2" = gr2)
-# test_list <- GRangesList(test_list)
-# filtered <- filter_by_pvalue(test_list, pvalue = 0.01, chromosomes = "chr1")
+test_list <- list("sample1" = gr1, "sample2" = gr2)
+test_list <- GRangesList(test_list)
+filtered <- filter_by_pvalue(test_list, pvalue = 0.01, chromosomes = "chr1")
