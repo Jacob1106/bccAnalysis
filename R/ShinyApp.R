@@ -145,7 +145,7 @@ ShinyApp <- function(named_file_list, height = 850) {
     server <- function(input, output) ({
         processedData <- reactive({
             #Checks if a file has been uploaded. 
-            req(input$GRangeList)
+            req(input$GRangeList, input$index_object1, input$index_object2)
             # Upstream Filtering and Processing
             datalist <- readRDS(input$GRangeList$datapath)
 
