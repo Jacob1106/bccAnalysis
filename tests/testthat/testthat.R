@@ -10,6 +10,7 @@ library(testthat)
 library(rtracklayer)
 library(GenomicRanges)
 
+#TEST OBJECT GENERATION 
 set.seed(123)
 
 n_peaks <- 50
@@ -101,17 +102,117 @@ cat("Shared peaks (identical ranges):", sum(countOverlaps(gr1, gr2, type = "equa
 cat("GR1 pvalues < 0.01:", sum(mcols(gr1)$pValue < 2), "\n")
 cat("GR2 pvalues < 0.01:", sum(mcols(gr2)$pValue < 2), "\n")
 
+#Generation of overlaps and uniques for the example data sets: 
+
+index <- findOverlaps(gr1, gr2)
+overlapsGr1 <- gr1[queryHits(index)]
+overlapsGr2 <- gr2[subjectHits(index)]
+uniqueGr1 <- gr1[-queryHits(index)]
+uniqueGr2 <- gr2[-subjectHits(index)]
+
+
+#--------------------------------------------------------------------
 # Test tha filter_by_pvalue works: 
 
+#Test that empty expect error 
+#Check it returns correct length with valid p value 
+#Test that it returns an error if its a genomic ranges object and not a list
+#Test to see if chromosome filter is working
+
 test_that("Filter by P value works", {
-    #Create test list: 
-    test_list <- list("sample1" = gr1, "sample2" = gr2)
+  #Create test list: 
+  test_list <- GRangesList(list("sample1" = gr1))
 
-    #Test 1: Test with known p-value: 
-    filtered <- filter_by_pvalue(test_list, pvalue = 0.01, chromosomes = "chr1")
 
-    expect_length(filtered, 2)
+  #Test 1: Test with known p-value: 
+  filtered <- filter_by_pvalue(test_list, pvalue = 0.01, chromosomes = "chr1")
+  expect_equal(length(filtered), 1)
+  expect_s4_class(filtered[[1]], "GenomicRanges")
+  expect_type(filtered, "list")
+  expect_equal(length(filtered[[1]]), 25)
+
+  #Test 2: Test Invalid p value: 
+  expect_error(filter_by_pvalue(GRangeList(), pvalue = 0.01, chromosomes = "chr1"))
+
+  #Test 3: Test if chromosome filter works: 
+  expect_equal(length(filter_by_pvalue(test_list, pvalue = 0.01, chromosomes = "chr2")[[1]]), 0)
+  expect_equal(length(filter_by_pvalue(test_list, pvalue = 0.9, chromosomes = "chr1")[[1]]), 50)
+  expect_equal(length(filter_by_pvalue(test_list, pvalue = 0.01, chromosomes = "chr1")[[1]]), 25)
+
+  #Test 4: for genomic range input: 
+  expect_error(filter_by_pvalue(gr1, pvalue = 0.01, chromosomes = "chr1"))
+
 })
-test_list <- list("sample1" = gr1, "sample2" = gr2)
-test_list <- GRangesList(test_list)
-filtered <- filter_by_pvalue(test_list, pvalue = 0.01, chromosomes = "chr1")
+
+#OverlapGRangeList TESTS: 
+
+#Test If it ouputs the correct options 
+#Test if input is wrong it returns an error 
+#Test If the there is an invalid overlap count it returns an error
+
+test_that("OverlapGRangeList Test",{
+  #GRANGE List Example: 
+  ex <- GRangesList(list("sample1" = gr1, "sample2" = gr2))
+  fil <- overlapGRangeList(ex, num_of_overlaps_required = 1)
+  fil_noOverlap <- overlapGRangeList(ex, num_of_overlaps_required = 0)
+  #Test 1: Outputs the correct class: 
+  expect_s4_class(fil, "GenomicRanges")
+  expect_s4_class(fil_noOverlap, "GenomicRanges")
+
+  #Test 2: Test if it returns error for wrong input e.g. genomic ranges input: 
+  expect_error(overlapGRangeList(gr1, num_of_overlaps_required = 1))
+
+  #Test 3: Test length of outputs for different overlap conditions: 
+  expect_equal(length(fil), 25)
+  expect_equal(length(fil_noOverlap), 75)
+
+  #Test 4: Invalid overlap number given: 
+  expect_error(overlapGRangeList(fil, num_of_overlaps_required = -1)) # Using -1 as invalid input: THERE CANT BE NEGATIVE OVERLAPS 
+})
+
+
+#proportionOverlapTibble Test: 
+
+#Test invalid input
+#Test all outputs for correct inputs
+#Test that the tibble is generated 
+
+test_that("Tibble Generation Test", {
+  
+  #Test Examples: 
+  ex <- GRangesList(list("sample1" = gr1, "sample2" = gr2))
+  f <- proportionOverlapTibble(object1 = gr1, object2 = gr2, object1_unique = uniqueGr1, object2_unique = uniqueGr2, overlapobject1 = overlapsGr1, overlapobject2 = overlapsGr2)
+
+  #Test 1: invalid input
+  expect_error(proportionOverlapTibble(object1 = ex, object2 = gr2, object1_unique = uniqueGr1, object2_unique = uniqueGr2, overlapobject1 = overlapsGr1, overlapobject2 = overlapsGr2)) 
+
+  #Test 2: Outputs: 
+  expect_s3_class(f, "data.frame")
+  expect_all_equal(f$PercentageOverlapPeaks, 50)
+  expect_equal(f$sample[1], "gr1")
+  expect_equal(f$sample[2], "gr2")
+  expect_all_equal(f$TotalPeaks, 50)
+  expect_all_equal(f$NumberofOverlapPeaks, 25)
+})
+
+#Venn Diagram Test: 
+# Test If a plot is generated 
+#Test If the input is wrong there is an error: 
+
+test_that("Venn Diagram Test ", {
+  example <- custom_venn_diagram("GR1", "GR2", DataA = gr1, DataB = gr2)
+
+  #Test 1: error if wrong input: 
+  expect_error(custom_venn_diagram("GR1", "GR2", dataA = GRangesList(list("sample1" = gr1)), dataB = gr2))
+
+})
+# ex <- GRangesList(list("sample1" = gr1, "sample2" = gr2))
+
+
+
+test_that("WidthPlot", {
+  x <- compareGRangeWidth(gr1, gr2)
+
+  #Test if a ggplot is produced: 
+  expect_s3_class(x, "ggplot")
+})
