@@ -6,7 +6,7 @@ Filtering Function that filter by a custom p value and chromosome list
 
 ``` r
 filter_by_pvalue(
-  list,
+  GRangeList,
   pvalue,
   chromosomes = c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7", "chr8", "chr9",
     "chr10", "chr11", "chr12", "chr13", "chr14", "chr15", "chr16", "chr17", "chr18",
@@ -16,10 +16,6 @@ filter_by_pvalue(
 
 ## Arguments
 
-- list:
-
-  List of GRanges Objects
-
 - pvalue:
 
   float value p value
@@ -27,6 +23,10 @@ filter_by_pvalue(
 - chromosomes:
 
   list of characters e.g. c("chr1", "chr2")
+
+- list:
+
+  List of GRanges Objects
 
 ## Value
 
